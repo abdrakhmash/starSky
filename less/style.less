@@ -1,0 +1,39 @@
+* {
+	box-sizing: border-box;
+}
+*:before,
+*:after {
+	box-sizing: border-box;
+}
+@-ms-viewport {
+	width: device-width;
+}
+@viewport {
+	width: device-width;
+}
+* {
+	margin: 0px;
+	padding: 0px;
+}
+body {
+	min-width: 320px;
+}
+.sky {
+    min-width: 320px;
+    width: 100%;
+    position: relative;
+    height: 320px;
+    background: linear-gradient(to bottom rgba(16, 0, 36, 1) rgba(16, 0, 36, 0.8));
+}
+.star {
+    position: absolute;
+    
+    border-radius: 50% 50%;
+    background-color: white;
+    width: 5px;
+    height: 5px;
+    filter: blur(1px);
+    box-shadow: 0 0 20px lightyellow;
+    opacity: 1;
+    
+}

@@ -9,58 +9,77 @@
     <body>
         <div class="sky" id='sky'></div>  
         <script>
-        var starParameters = { 
-            quantityMin: 450,
-            quantityMax: 600,
-            zIndexMin: 1,
-            zIndexMax: 350,
-            radiusMin: 1,
-            radiusMax: 5,
-            blurMin: 0,
-            blurMax: 3,
-            boxShadowMin: 2,
-            boxShadowMax: 25,
-            opacityMin: 80,
-            opacityMax: 100  
-        }
-        
-        var sky = document.getElementById('sky');
-        var randomNumber = function getRandomInt(min, max) {
-                return Math.floor(Math.random() * (max - min)) + min;
+            var starParameters = { 
+                quantityMin: 450,
+                quantityMax: 600,
+                zIndexMin: 1,
+                zIndexMax: 350,
+                radiusMin: 1,
+                radiusMax: 5,
+                blurMin: 0,
+                blurMax: 3,
+                boxShadowMin: 2,
+                boxShadowMax: 25,
+                opacityMin: 80,
+                opacityMax: 100  
             }
-        var starQuantity = randomNumber(starParameters.quantityMin, starParameters.quantityMax);
-    
-        var setStarParameters = function (el) {
-            /*position*/
-            var maxLeft = window.innerWidth + 1;
-            el.style.left = '' + randomNumber(0, maxLeft) + 'px' ;
-            el.style.top = '' + randomNumber(0, 100) + 'vh'; 
-            el.style.zIndex = randomNumber(starParameters.zIndexMin, starParameters.zIndexMax);
-            
-            /*Size*/
-            var starRadius = randomNumber(starParameters.radiusMin, starParameters.radiusMax);
-            el.style.width = starRadius + 'px';
-            el.style.height = starRadius + 'px';
-            
-            /*Light effects*/
-            el.style.boxShadow = '0 0 ' + randomNumber(starParameters.boxShadowMin, starParameters.boxShadowMax) + 'px yellow';
-            var blurRadius = randomNumber(starParameters.blurMin, starParameters.blurMax);
-            el.style.filter = 'blur(' + blurRadius + 'px)';
-            el.style.opacity = randomNumber(starParameters.opacityMin, starParameters.opacityMax+1)/100;     
-        };
-            
-        var createStar = function (classNumber) {
-            var star = document.createElement('div');
-            star.className = 'star';
-            star.classList.add('star' + classNumber);
-            setStarParameters(star);
-            
-            sky.appendChild(star);
-        }
-        
-        for (var i = 0; i <= starQuantity; i++) {
-            createStar(i);
-        }
+
+            var sky = document.getElementById('sky');
+            var randomNumber = function getRandomInt(min, max) {
+                    return Math.floor(Math.random() * (max - min)) + min;
+                }
+            var starQuantity = randomNumber(starParameters.quantityMin, starParameters.quantityMax);
+
+            var setStarParameters = function (el) {
+                /*position*/
+                var maxLeft = window.innerWidth + 1;
+                el.style.left = '' + randomNumber(0, maxLeft) + 'px' ;
+                el.style.top = '' + randomNumber(0, 100) + 'vh'; 
+                el.style.zIndex = randomNumber(starParameters.zIndexMin, starParameters.zIndexMax);
+
+                /*Size*/
+                var starRadius = randomNumber(starParameters.radiusMin, starParameters.radiusMax);
+                el.style.width = starRadius + 'px';
+                el.style.height = starRadius + 'px';
+
+                /*Light effects*/
+                el.style.boxShadow = '0 0 ' + randomNumber(starParameters.boxShadowMin, starParameters.boxShadowMax) + 'px lightyellow';
+                var blurRadius = randomNumber(starParameters.blurMin, starParameters.blurMax);
+                el.style.filter = 'blur(' + blurRadius + 'px)';
+                el.style.opacity = randomNumber(starParameters.opacityMin, starParameters.opacityMax+1)/100;
+                
+                /*animation effects&properties*/
+                
+            };
+
+            var createStar = function (classNumber) {
+                var star = document.createElement('div');
+                star.className = 'star';
+                star.classList.add('star' + classNumber);
+                setStarParameters(star);
+                var glowMark = randomNumber(1, 100);
+                var pulseMark = randomNumber(1, 100);
+                if (glowMark > 80) {
+                    star.classList.add('star--glowing');
+                    var delay = randomNumber(0, 3)/randomNumber(1, 10);
+                    star.style.animationDelay = delay + 's';
+                    var dur = randomNumber(5, 40)/10;
+                    star.style.animationDuration = dur + 's';   
+                }
+                if (pulseMark < 85 && pulseMark > 75) {
+                    star.classList.add('star--pulse');
+                    var delay = randomNumber(3, 6)/randomNumber(1, 3);
+                    star.style.animationDelay = delay + 's';
+                    var dur = randomNumber(30, 50)/10;
+                    star.style.animationDuration = dur + 's';
+                }
+
+                sky.appendChild(star);
+            }
+
+            for (var i = 0; i <= starQuantity; i++) {
+                createStar(i);
+            }
         
     </script>       
     </body>
